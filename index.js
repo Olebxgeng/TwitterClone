@@ -1,16 +1,19 @@
 import { tweetsData } from "./data.js";
 const tweetInput = document.getElementById("tweet-input")
-const tweetBtn = document.getElementById("tweet-btn")
 
-tweetBtn.addEventListener('click', function(){
+// tweetBtn.addEventListener('click', function(){
     
-})
+// })
 
 document.addEventListener('click', function(e){
     if(e.target.dataset.likes){
         handleLikeClick(e.target.dataset.likes)
     }else if(e.target.dataset.retweets){
         handleRetweetClick(e.target.dataset.retweets)
+    }else if(e.target.dataset.replies){
+        handleReplyClick(e.target.dataset.replies)
+    }else if(e.target.id === 'tweet-btn'){
+        
     }
 })
 
@@ -45,6 +48,14 @@ function handleRetweetClick(tweetId){
     render()
 }
 
+function handleReplyClick(replyId){
+    document.getElementById(`replies-${replyId}`).classList.toggle('hidden')
+}
+
+function handleTweetBtnClick(){
+
+}
+
 function getFeedHtml(){
     let feedHtml = ``
     tweetsData.forEach(function(tweet){
@@ -58,6 +69,23 @@ function getFeedHtml(){
         if(tweet.isRetweeted){
             retweetIconClass = 'retweeted'
         }
+
+        let repliesHtml = ''
+
+        if(tweet.replies.length > 0){
+            tweet.replies.forEach(function(reply){
+                repliesHtml+=`
+            <div class="tweet-reply">
+                <div class="tweet-inner">
+                    <img src="${reply.profilePic}" class="profile-pic">
+                        <div>
+                            <p class="handle">${reply.handle}</p>
+                            <p class="tweet-text">${reply.tweetText}</p>
+                        </div>
+                    </div>
+            </div>`
+        })
+    }
 
         feedHtml += 
         `<div class="tweet">
@@ -82,6 +110,9 @@ function getFeedHtml(){
                     </div>   
                 </div>            
             </div>
+            <div class="hidden" id="replies-${tweet.uuid}">
+            ${repliesHtml}
+        </div> 
         </div>`
     })
     return feedHtml
