@@ -127,6 +127,41 @@ button{
     width: 48px;
 }
 
+/* reply-input */
+.reply-input {
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px 0px 0px 40px;
+    height: 60px;
+    width: 60%;
+    font-size: 20px;
+    line-height: 30px;
+    resize: none;
+}
+
+.reply-holder {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.reply-button {
+    margin-left: 40px;
+    margin-top: 5px;
+    background-color: #1DA1F2;
+    border: none;
+    color: white;
+    padding-top: 5px;
+    border-radius: 20px;
+    width: 25%;
+    height: 30px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+
 /* utility */
 .hidden{
     display: none;
